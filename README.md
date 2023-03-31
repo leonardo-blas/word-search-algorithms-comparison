@@ -14,4 +14,4 @@ Pictures: Currently, the dictionary only provides links to the images of radical
 ## Credits
 I developed this using the Kanji alive data, which is publicly available on https://github.com/kanjialive/kanji-data-media.
 
-https://github.com/leonardo-blas/word-search-algorithms-comparison/blob/main/Graph.png?raw=true![image](https://user-images.githubusercontent.com/125172895/228992116-34823643-f0b4-435d-ae25-42746c3f5941.png)
+![graph](https://raw.githubusercontent.com/leonardo-blas/word-search-algorithms-comparison/main/Graph.png)
