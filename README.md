@@ -15,5 +15,8 @@ In the case of the trie search, it was preloaded with the dictionary's words bef
 ## Results
 ![graph](https://raw.githubusercontent.com/leonardo-blas/word-search-algorithms-comparison/main/Graph.png)
 
+## Note
+Some algorithms were updated to show other messages, like "word found," and don't provide the same output as the ones in Sample Run.txt.
+
 ## Credits
 My classmate, Pauline Garingan, created the StringAlgorithms.cpp file.
