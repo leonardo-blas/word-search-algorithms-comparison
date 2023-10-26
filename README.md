@@ -19,7 +19,7 @@ In this case, the searching of each of the 26 words was conducted 1000 times usi
 ### Standard trie search
 Relies on a user-defined standard Trie class.
 <br>
-A Trie object is prefilled with 355 thousand words previous to the searching process.
+A Trie object is prefilled with the 355 thousand words previous to the searching process.
 
 ### Boyer-Moore search
 Relies on a user-defined standard Boyer-Moore search implementation.
