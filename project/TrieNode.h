@@ -1,20 +1,14 @@
-#ifndef _TRIENODE_
-#define _TRIENODE_
+#ifndef TRIENODE_H
+#define TRIENODE_H
 
-#include "Trie.h"
+#include <unordered_map>
 
-/**
-A TrieNode class for our trie structure.
-*/
-struct Trie::TrieNode {
-	// Befriend Trie so it can use TrieNode's components.
-	friend Trie;
+class TrieNode {
+public:
+    std::unordered_map<char, TrieNode*> children;
+    bool end_of_word;
 
-private:
-	std::map<char, std::shared_ptr<TrieNode>> children;
-	size_t prefixes;
-	bool end_of_word;
-	TrieNode();
+    TrieNode() : end_of_word(false) {}
 };
 
 #endif

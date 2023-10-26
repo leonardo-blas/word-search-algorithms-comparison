@@ -1,50 +1,40 @@
-#include "Helpers.h"
-#include "StringAlgorithms.h"
-#include <chrono>
+#include "read_helpers.h"
+#include "test_helpers.h"
 
-const std::string to_search[] = { "apple", "banana", "coconut", "date",
-	 "elderberry", "fig", "grape", "hackberry", "imbe", "jackfruit", "kiwi",
-	 "lime", "mango", "nectarine", "orange", "papaya", "quesadilla", "rambutan",
-	 "strawberry", "tangerine", "ugli", "vanilla", "watermelon", "xray",
-	 "yellow", "zucchini" };
+const std::vector<std::string> to_search =
+        { "apple", "banana", "coconut", "date","elderberry", "fig", "grape", "hackberry","imbe", "jackfruit", "kiwi",
+          "lime", "mango", "nectarine", "orange", "papaya", "quesadilla", "rambutan", "strawberry", "tangerine", "ugli",
+          "vanilla", "watermelon", "xray", "yellow", "zucchini"
+        };
 
 int main() {
-   // Search in the Trie structure.
-   std::cout << "TRIE:\n";
-   Trie trie;
-	read_dictionary_into_trie(trie);
-	double duration;
-   for (size_t i = 0; i < 26; ++i) {
-      auto start = std::chrono::high_resolution_clock::now();
-      trie.search_algorithm(to_search[i]);
-      auto stop = std::chrono::high_resolution_clock::now();
-      duration = std::chrono::duration_cast<std::chrono::nanoseconds>
-         (stop - start).count();
-      std::cout << to_search[i] << "'s search time:\t\t" << duration << '\n';
-   }
+    const std::size_t trials = 1000;
+    std::map<std::string, std::chrono::duration<double>> trie_test_data;
+    std::map<std::string, std::chrono::duration<double>> Boyer_Moore_test_data;
+    std::map<std::string, std::chrono::duration<double>> string_brute_force_test_data;
+    std::map<std::string, std::chrono::duration<double>> vector_brute_force_test_data;
 
-   // Search using the Boyer-Moore algorithm.
-   std::cout << "\nBOYER-MOORE:\n";
-	std::string dictionary;
-	read_dictionary_into_string(dictionary);
-	for (size_t i = 0; i < 26; ++i) {
-     auto start = std::chrono::high_resolution_clock::now();
-	  boyerMooreSearch(dictionary, to_search[i]);
-     auto stop = std::chrono::high_resolution_clock::now();
-     duration = std::chrono::duration_cast<std::chrono::nanoseconds>
-        (stop - start).count();
-     std::cout << to_search[i] << "'s search time:\t\t" << duration << '\n';
-  }
-   
-   //Search using the Brute Force algorithm.
-   std::cout << "\nBRUTE FORCE:\n";
-   for (size_t i = 0; i < 26; ++i) {
-      auto start = std::chrono::high_resolution_clock::now();
-      bruteForceSearch(dictionary, to_search[i]);
-      auto stop = std::chrono::high_resolution_clock::now();
-      duration = std::chrono::duration_cast<std::chrono::nanoseconds>
-         (stop - start).count();
-      std::cout << to_search[i] << "'s search time:\t\t" << duration << '\n';
+    Trie trie_based_dictionary;
+    std::string string_based_dictionary;
+    std::vector<std::string> vector_based_dictionary;
 
-   }
+    read_dictionary_into_trie(trie_based_dictionary);
+    read_dictionary_into_string(string_based_dictionary);
+    read_dictionary_into_vector(vector_based_dictionary);
+
+    std::cout << "TRIE:\n";
+    trie_test(trie_based_dictionary, to_search, trials, trie_test_data);
+    print_test_data(trie_test_data);
+
+    std::cout << "\nBOYER-MOORE:\n";
+    Boyer_Moore_test(string_based_dictionary, to_search, trials, Boyer_Moore_test_data);
+    print_test_data(Boyer_Moore_test_data);
+
+    std::cout << "\nSTRING-BASED BRUTE FORCE:\n";
+    string_brute_force_test(string_based_dictionary, to_search, trials, string_brute_force_test_data);
+    print_test_data(string_brute_force_test_data);
+
+    std::cout << "\nVECTOR-BASED BRUTE FORCE:\n";
+    vector_brute_force_test(vector_based_dictionary, to_search, trials, vector_brute_force_test_data);
+    print_test_data(vector_brute_force_test_data);
 }
