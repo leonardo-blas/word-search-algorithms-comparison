@@ -15,6 +15,8 @@ const std::vector<std::string> to_search =
 The searching process is conducted a "trials" number of times. This variable can be found and modified in main.cpp. Then, the times are averaged.
 <br>
 In this case, the searching of each of the 26 words was conducted 1000 times using each search method.
+<br>
+The algorithms were obtained online and adapted for this project.
 
 ### Standard trie search
 Relies on a user-defined standard Trie class.
